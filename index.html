@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diário de Proteínas</title>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>Diário de Proteínas</h1>
+<p class="mut" style="margin:0">Dados salvos neste navegador. Cada dia fecha à meia-noite, mas continua editável.</p>
+
+<section>
+ <div class="row">
+  <button class="s" id="prev">‹</button>
+  <input type="date" id="date" style="flex:0 1 160px">
+  <button class="s" id="next">›</button>
+  <button class="s" id="hoje">Hoje</button>
+  <span class="badge" id="status"></span>
+ </div>
+ <div class="tot">
+  <div><b id="tp">0</b>proteína (g)</div>
+  <div><b id="tc">0</b>carboidrato (g)</div>
+  <div><b id="tk">0</b>kcal</div>
+ </div>
+ <div class="row mut">Meta de proteína: <input type="number" id="goal" style="flex:0 1 90px"> g <span id="gtxt"></span></div>
+ <div class="bar"><i id="gbar"></i></div>
+</section>
+
+<section>
+ <h2>Adicionar alimento</h2>
+ <div class="row">
+  <input id="food" list="foods" placeholder="Buscar alimento (ex: frango)">
+  <input id="grams" type="number" placeholder="gramas" style="flex:0 1 100px">
+  <button id="add">Adicionar</button>
+ </div>
+ <datalist id="foods"></datalist>
+ <div class="mut" id="prev2"></div>
+ <div id="list"></div>
+</section>
+
+<section>
+ <h2>Ler tabela nutricional (foto)</h2>
+ <div class="row">
+  <input type="file" id="img" accept="image/*" capture="environment">
+  <span class="mut" id="ocrst"></span>
+ </div>
+ <div id="ocrbox" hidden>
+  <p class="mut">Confira os valores lidos e corrija se precisar.</p>
+  <div class="row"><input id="on" placeholder="Nome do alimento"></div>
+  <div class="row mut">Valores referentes a <input id="ob" type="number" style="flex:0 1 80px"> g/ml</div>
+  <div class="row">
+   <input id="ok" type="number" placeholder="kcal">
+   <input id="op" type="number" placeholder="proteína (g)">
+   <input id="oc" type="number" placeholder="carbo (g)">
+  </div>
+  <div class="row mut">Quanto você comeu: <input id="oe" type="number" style="flex:0 1 80px"> g/ml</div>
+  <div class="row"><button id="oadd">Adicionar ao dia</button><button class="s" id="osave">Salvar na minha tabela</button></div>
+  <details><summary class="mut">Texto lido</summary><pre id="otxt" class="mut" style="white-space:pre-wrap"></pre></details>
+ </div>
+</section>
+
+<section>
+ <h2>Gráficos</h2>
+ <div class="row">
+  <button class="s" data-r="7">7 dias</button>
+  <button class="s" data-r="30">30 dias</button>
+  <button class="s" data-r="90">90 dias</button>
+  <input type="date" id="gf" style="flex:0 1 150px"> a <input type="date" id="gt" style="flex:0 1 150px">
+  <button id="gok">Ver</button>
+ </div>
+ <div class="row"><b>Proteína</b><input type="color" id="cp"></div><canvas id="chp"></canvas>
+ <div class="row"><b>Carboidratos</b><input type="color" id="cc"></div><canvas id="chc"></canvas>
+ <div class="row"><b>Calorias</b><input type="color" id="ck"></div><canvas id="chk"></canvas>
+ <p class="mut">Só aparecem os dias com registro.</p>
+</section>
+
+<section>
+ <h2>Minha tabela de alimentos</h2>
+ <p class="mut">Valores por 100 g. Alimentos que você cadastra entram na busca.</p>
+ <div class="row">
+  <input id="fn" placeholder="Nome">
+  <input id="fk" type="number" placeholder="kcal">
+  <input id="fp" type="number" placeholder="prot (g)">
+  <input id="fc" type="number" placeholder="carbo (g)">
+  <button id="fadd">Cadastrar</button>
+ </div>
+ <div id="cust"></div>
+</section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
